@@ -970,3 +970,55 @@ nobiliumsuppression = INFINITY
 	if(energy_released > 0)
 		air.temperature += energy_released / heat_capacity
 		return REACTING
+
+
+/datum/gas_reaction/stim_ball
+	priority = 21
+	name ="Stimulum Energy Ball"
+	id = "stimball"
+
+/datum/gas_reaction/stim_ball/init_reqs()
+	min_requirements = list(
+		/datum/gas/stimulum = STIM_BALL_GAS_AMOUNT,
+		/datum/gas/tritium = STIM_BALL_GAS_AMOUNT,
+		"TEMP" = FIRE_MINIMUM_TEMPERATURE_TO_EXIST,
+		"MAX_TEMP" = 500000
+	)
+	
+/datum/gas_reaction/stim_ball/react(datum/gas_mixture/air, datum/holder)
+	var/list/cached_gases = air.gases
+	var/turf/open/location
+	var/heat_capacity = air.heat_capacity()
+	var/temperature = air.temperature
+	var/burn_rate = 0
+	var/balls_shot = 0
+	var/tritstimratio = cached_gases[/datum/gas/tritium][MOLES] / cached_gases[/datum/gas/stimulum][MOLES]
+	var/stimtritratio = cached_gases[/datum/gas/stimulum][MOLES] / cached_gases[/datum/gas/tritium][MOLES]
+
+	if(istype(holder,/datum/pipeline)) //Find the tile the reaction is occuring on, or a random part of the network if it's a pipenet.
+		var/datum/pipeline/pipenet = holder
+		location = get_turf(pick(pipenet.members))
+	else
+		location = get_turf(holder)
+	
+	burn_rate = min(((max(tritstimratio, stimtritratio) + temperature * 0.005) ** 2) / 4, cached_gases[/datum/gas/tritium][MOLES], cached_gases[/datum/gas/stimulum][MOLES])
+	balls_shot = min(round(burn_rate/2), 16)
+
+	if ((cached_gases[/datum/gas/tritium][MOLES] - burn_rate < 0 ) || (cached_gases[/datum/gas/stimulum][MOLES] - burn_rate < 0)) //Shouldn't produce gas from nothing.
+		return NO_REACTION
+	
+	if (balls_shot > 0)
+		var/random_starting_angle = rand(0,360)
+		var/increment = 360/balls_shot
+		for (var/shotcount in 1 to balls_shot)
+			location.fire_nuclear_particle_cell(random_starting_angle + shotcount * increment)
+
+	var/energy_released = burn_rate * 50000 * (1/burn_rate) // A higher trit/stim or stim/trit ratio results in slower energy gain, more stable
+	air.temperature += energy_released	/ heat_capacity
+
+	cached_gases[/datum/gas/tritium][MOLES] -= burn_rate
+	cached_gases[/datum/gas/stimulum][MOLES] -= burn_rate
+
+	if (balls_shot == 0 && burn_rate > 0)
+		ASSERT_GAS(/datum/gas/halon, air)
+		cached_gases[/datum/gas/halon][MOLES] += burn_rate * 0.075 //Adds a way to tell that the reaction isnt powerful enough
