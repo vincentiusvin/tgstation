@@ -27,3 +27,13 @@
 /atom/proc/fire_nuclear_particle(angle = rand(0,360)) //used by fusion to fire random nuclear particles. Fires one particle in a random direction.
 	var/obj/projectile/energy/nuclear_particle/P = new /obj/projectile/energy/nuclear_particle(src)
 	P.fire(angle)
+
+/obj/projectile/energy/nuclear_particle/cellular
+	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
+	irradiate = 0
+	damage_type = CLONE
+	damage = 20
+
+/atom/proc/fire_nuclear_particle_cell(angle = rand(0,360)) //used by fusion to fire random nuclear particles. Fires one particle in a random direction.
+	var/obj/projectile/energy/nuclear_particle/cellular/P = new /obj/projectile/energy/nuclear_particle/cellular(src)
+	P.fire(angle)
