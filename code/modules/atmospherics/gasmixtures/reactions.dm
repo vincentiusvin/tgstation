@@ -1046,7 +1046,7 @@ nobiliumsuppression = INFINITY
 		location = get_turf(holder)
 
 	burn_rate = min(((max(tritstimratio, stimtritratio) + temperature * 0.005) ** 2) / 4, cached_gases[/datum/gas/tritium][MOLES], cached_gases[/datum/gas/stimulum][MOLES])
-	balls_shot = min(round(burn_rate/2), 16)
+	balls_shot = min(round(burn_rate/4), 16)
 
 	if ((cached_gases[/datum/gas/tritium][MOLES] - burn_rate < 0 ) || (cached_gases[/datum/gas/stimulum][MOLES] - burn_rate < 0)) //Shouldn't produce gas from nothing.
 		return NO_REACTION
