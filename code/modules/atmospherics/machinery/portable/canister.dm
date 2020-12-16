@@ -261,6 +261,19 @@
 	air_contents.gases[/datum/gas/tritium][MOLES] = 300
 	air_contents.temperature = 10000
 
+/obj/machinery/portable_atmospherics/canister/stimball_test
+	name = "stimball test canister"
+	desc = "Don't be a badmin ep.2"
+	heat_limit = 1e12
+	pressure_limit = 1e14
+	mode = CANISTER_TIER_3
+
+/obj/machinery/portable_atmospherics/canister/stimball_test/create_gas()
+	air_contents.add_gases(/datum/gas/stimulum, /datum/gas/tritium)
+	air_contents.gases[/datum/gas/stimulum][MOLES] = 7000
+	air_contents.gases[/datum/gas/tritium][MOLES] = 21000
+	air_contents.temperature = 400
+
 /obj/machinery/portable_atmospherics/canister/proc/get_time_left()
 	if(timing)
 		. = round(max(0, valve_timer - world.time) / 10, 1)
