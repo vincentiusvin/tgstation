@@ -1057,7 +1057,7 @@ nobiliumsuppression = INFINITY
 		for (var/shotcount in 1 to balls_shot)
 			location.fire_nuclear_particle_cell(random_starting_angle + shotcount * increment)
 
-	var/energy_released = burn_rate * 50000 * (1/burn_rate) // A higher trit/stim or stim/trit ratio results in slower energy gain, more stable
+	var/energy_released = burn_rate * 50000 * (1 / max(tritstimratio, stimtritratio)) // A higher trit/stim or stim/trit ratio results in slower energy gain, more stable
 	air.temperature += energy_released	/ heat_capacity
 
 	cached_gases[/datum/gas/tritium][MOLES] -= burn_rate
