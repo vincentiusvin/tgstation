@@ -25,7 +25,6 @@
 		"destructive_analyzer",
 		"destructive_scanner",
 		"desttagger",
-		"doppler_array",
 		"experi_scanner",
 		"experimentor",
 		"handlabel",
@@ -844,6 +843,7 @@
 		"ultra_micro_laser",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 3000)
+	discount_experiments = list(/datum/experiment/toxins/lowyieldbomb = 1500)
 
 /datum/techweb_node/emp_super
 	id = "emp_super"
@@ -854,6 +854,7 @@
 		"quadultra_micro_laser",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 3000)
+	discount_experiments = list(/datum/experiment/toxins/lowyieldbomb = 1500)
 
 /////////////////////////Clown tech/////////////////////////
 /datum/techweb_node/clown
@@ -1044,6 +1045,7 @@
 		"stasis",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2000)
+	discount_experiments = list(/datum/experiment/toxins/noblium = 1000)
 
 /datum/techweb_node/subdermal_implants
 	id = "subdermal_implants"
@@ -1074,6 +1076,7 @@
 		"cybernetic_stomach_tier2",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 1000)
+	discount_experiments = list(/datum/experiment/toxins/bz = 500)
 
 /datum/techweb_node/cyber_organs_upgraded
 	id = "cyber_organs_upgraded"
@@ -1088,6 +1091,7 @@
 		"cybernetic_stomach_tier3",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 1500)
+	discount_experiments = list(/datum/experiment/toxins/bz = 750)
 
 /datum/techweb_node/cyber_implants
 	id = "cyber_implants"
@@ -1104,6 +1108,7 @@
 		"ci-welding",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
+	discount_experiments = list(/datum/experiment/toxins/nitryl = 500)
 
 /datum/techweb_node/adv_cyber_implants
 	id = "adv_cyber_implants"
@@ -1117,6 +1122,7 @@
 		"ci-toolset",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
+	discount_experiments = list(/datum/experiment/toxins/nitryl = 500)
 
 /datum/techweb_node/combat_cyber_implants
 	id = "combat_cyber_implants"
@@ -1131,6 +1137,7 @@
 		"ci-xray",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
+	discount_experiments = list(/datum/experiment/toxins/nitryl = 500)
 
 ////////////////////////Tools////////////////////////
 
@@ -1269,7 +1276,7 @@
 		"tele_shield",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 10000)
-	required_experiments = list(/datum/experiment/explosion/calibration)
+	required_experiments = list(/datum/experiment/toxins/lowyieldbomb)
 
 /datum/techweb_node/adv_weaponry
 	id = "adv_weaponry"
@@ -1280,7 +1287,7 @@
 		"pin_loyalty",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 10000)
-	required_experiments = list(/datum/experiment/explosion/medium)
+	discount_experiments = list(/datum/experiment/toxins/hydrogenbomb = 2500)
 
 /datum/techweb_node/electric_weapons
 	id = "electronic_weapons"
@@ -1302,6 +1309,7 @@
 		"nuclear_gun",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
+	discount_experiments = list(/datum/experiment/toxins/hydrogenbomb = 1250)
 
 /datum/techweb_node/beam_weapons
 	id = "beam_weapons"
@@ -1313,6 +1321,7 @@
 		"xray_laser",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
+	discount_experiments = list(/datum/experiment/toxins/nobliumbomb = 1250)
 
 /datum/techweb_node/adv_beam_weapons
 	id = "adv_beam_weapons"
@@ -1323,6 +1332,7 @@
 		"beamrifle",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
+	discount_experiments = list(/datum/experiment/toxins/nobliumbomb = 1250)
 
 /datum/techweb_node/explosive_weapons
 	id = "explosive_weapons"
@@ -1335,7 +1345,7 @@
 		"pyro_Grenade",
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
-	required_experiments = list(/datum/experiment/explosion/maxcap)
+	discount_experiments = list(/datum/experiment/toxins/halon = 1250)
 
 /datum/techweb_node/ballistic_weapons
 	id = "ballistic_weapons"

@@ -2194,7 +2194,7 @@
 #include "code\modules\experisci\experiment\handlers\experiment_handler.dm"
 #include "code\modules\experisci\experiment\types\experiment.dm"
 #include "code\modules\experisci\experiment\types\exploration.dm"
-#include "code\modules\experisci\experiment\types\explosive.dm"
+#include "code\modules\experisci\experiment\types\toxins.dm"
 #include "code\modules\experisci\experiment\types\physical_experiment.dm"
 #include "code\modules\experisci\experiment\types\random_scanning.dm"
 #include "code\modules\experisci\experiment\types\scanning.dm"
@@ -3634,4 +3634,10 @@
 #include "interface\menu.dm"
 #include "interface\stylesheet.dm"
 #include "interface\skin.dmf"
+
+#include "code\modules\research\toxins\scipaper.dm"
+#include "code\modules\research\toxins\scipaper_publisher.dm"
+#include "code\modules\research\toxins\scipaper_bombprocessor.dm"
+#include "code\modules\research\toxins\scipaper_programs.dm"
+#include "code\modules\research\toxins\scipaper_explosions.dm"
 // END_INCLUDE

@@ -1,3 +1,4 @@
+/*
 #define PRINTER_TIMEOUT 40
 
 /obj/machinery/doppler_array
@@ -266,3 +267,4 @@
 		return
 
 #undef PRINTER_TIMEOUT
+*/

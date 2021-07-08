@@ -29,7 +29,6 @@
 	var/id = "generic"
 	/// IC logs
 	var/list/research_logs = list()
-	var/largest_bomb_value = 0
 	/// Organization name, used for display
 	var/organization = "Third-Party"
 	/// Current per-second production, used for display only.
@@ -42,6 +41,14 @@
 	var/list/available_experiments = list()
 	/// Completed experiments
 	var/list/completed_experiments = list()
+	
+	// Various variables for scientific papers.
+	/// Renown unlocks better journals and more access to the advanced stuffs.
+	var/scipaper_scientific_renown = 0
+	/// Cooperation is the currency for data/experiment sharing.
+	var/scipaper_scientific_cooperation = 0
+	/// Papers already published by the crew
+	var/list/published_papers = list()
 
 /datum/techweb/New()
 	SSresearch.techwebs += src

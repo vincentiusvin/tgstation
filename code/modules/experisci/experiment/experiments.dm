@@ -77,27 +77,40 @@
 	/obj/effect/decal/cleanable/blood)
 	total_requirement = 3
 
-/datum/experiment/explosion/calibration
-	name = "Is This Thing On?"
-	description = "The engineers from last shift left a notice for us that the doppler array seemed to be malfunctioning. \
-		Could you check that it is still working? Any explosion will do!"
-	required_light = 1
+/datum/experiment/toxins/lowyieldbomb
+	name = "Low-Yield Explosives"
+	description = "Low-yield explosives may prove useful for our asset protection teams. Perform research and publish papers on this field."
+	experiment_data_path = /datum/toxins_experiment_data/explosive/lowyield
 
-/datum/experiment/explosion/maxcap
-	name = "Mother of God"
-	description = "A recent outbreak of a blood-cult in a nearby sector necessitates the development of a large explosive. \
-		Create a large enough explosion to prove your bomb, we'll be watching."
+/datum/experiment/toxins/hydrogenbomb
+	name = "Hydrogen Combustion Explosives"
+	description =  "Hydrogen and it's derivatives reacts very energetically with oxygen under the right conditions. Perform research and publish papers on this field. "
+	experiment_data_path = /datum/toxins_experiment_data/explosive/hydrogen
 
-/datum/experiment/explosion/medium
-	name = "Explosive Ordinance Experiment"
-	description = "Alright, can we really call ourselves professionals if we can't make shit blow up?"
-	required_heavy = 2
-	required_light = 6
+/datum/experiment/toxins/nobliumbomb
+	name = "Noblium Explosives"
+	description = "The formation of Hyper-Noblium is very energetic and can be harnessed for explosives. Perform research and publish papers on this field."
+	experiment_data_path = /datum/toxins_experiment_data/explosive/noblium
 
-/datum/experiment/explosion/maxcap/New()
-	required_devastation = GLOB.MAX_EX_DEVESTATION_RANGE
-	required_heavy = GLOB.MAX_EX_HEAVY_RANGE
-	required_light = GLOB.MAX_EX_LIGHT_RANGE
+/datum/experiment/toxins/nitryl
+	name = "Nitryl Gas Shells"
+	description = "The delivery of Nitryl gas into an area of operation might prove useful. Perform research and publish papers on this field."
+	experiment_data_path = /datum/toxins_experiment_data/gaseous/nitryl
+
+/datum/experiment/toxins/bz
+	name = "BZ Gas Shells"
+	description = "The delivery of BZ gas into an area of operation might prove useful. Perform research and publish papers on this field."
+	experiment_data_path = /datum/toxins_experiment_data/gaseous/bz
+
+/datum/experiment/toxins/noblium
+	name = "Noblium Gas Shells"
+	description = "The delivery of Noblium gas into an area of operation might prove useful. Perform research and publish papers on this field."
+	experiment_data_path = /datum/toxins_experiment_data/gaseous/noblium
+
+/datum/experiment/toxins/halon
+	name = "Halon Gas Shells"
+	description = "The delivery of Halon gas into an area of operation might prove useful. Perform research and publish papers on this field."
+	experiment_data_path = /datum/toxins_experiment_data/gaseous/halon
 
 /datum/experiment/scanning/random/material/meat
 	name = "Biological Material Scanning Experiment"

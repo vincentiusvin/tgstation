@@ -1334,14 +1334,6 @@
 		/obj/item/stock_parts/matter_bin = 1,
 		/obj/item/stock_parts/manipulator = 2)
 
-/obj/item/circuitboard/machine/doppler_array
-	name = "Tachyon-Doppler Research Array (Machine Board)"
-	greyscale_colors = CIRCUIT_COLOR_SCIENCE
-	build_path = /obj/machinery/doppler_array/research
-	req_components = list(
-		/obj/item/stock_parts/micro_laser = 2,
-		/obj/item/stock_parts/scanning_module = 4)
-
 /obj/item/circuitboard/machine/exoscanner
 	name = "Exoscanner (Machine Board)"
 	greyscale_colors = CIRCUIT_COLOR_SCIENCE
