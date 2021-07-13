@@ -26,7 +26,7 @@ export const BombProcessor = (props, context) => {
 
 export const BombProcessorContent = (props, context) => {
   const { act, data } = useBackend(context);
-  const [tab, setTab] = useSharedState(context, 'tab', 'catalog');
+  const [tab, setTab] = useSharedState(context, 'tab', 1);
   const ResultantGasmix = (
     <Section title={data.combined_gasmix.name}>
       {!(
@@ -107,37 +107,40 @@ export const BombProcessorContent = (props, context) => {
     </Section>
   );
   const EligibleExperiments = tab === 2 && (
-	<Section>
-		<Section title = "Low-Yield Explosives">
-			<LabeledList>
-				We need you to perform x
-				<LabeledList.Item label="Experiment Metric">
-					Bomb Size
-				</LabeledList.Item>
-				<LabeledList.Item label={"Target Amount - Tier One"}>
-					250 moles
-				</LabeledList.Item>
-			</LabeledList>
-		</Section>
+    <Section>
+      {data.experiment_information.map((experiment) => (
+        <Section title={experiment.name}>
+          {experiment.description}
+          <LabeledList>
+            {Object.keys(experiment.midpoints).map((tier_index) => (
+              <LabeledList.Item
+                label={
+                  'Target Amount - Tier ' + String(Number(tier_index) + 1)
+                }>
+                {experiment.midpoints[tier_index]}
+              </LabeledList.Item>
+            ))}
+          </LabeledList>
+        </Section>
+      ))}
     </Section>
   );
   return (
     <Section>
       <Tabs>
-        <Tabs.Tab
-          selected={tab === 1}
-          onClick={() => setTab(1)}>
+        <Tabs.Tab selected={tab === 1} onClick={() => setTab(1)}>
           {'Tank Composition'}
         </Tabs.Tab>
-        <Tabs.Tab
-          selected={tab === 2}
-		  onClick={() => setTab(2)}>
+        <Tabs.Tab selected={tab === 2} onClick={() => setTab(2)}>
           {'View Eligible Experiments'}
         </Tabs.Tab>
       </Tabs>
+      {ResultantGasmix}
+	  <Button disabled={!data.valve} onClick={() => act('eject')}>
+        {'Eject Valve'}
+      </Button>
       {TankComposition}
       {EligibleExperiments}
-      {ResultantGasmix}
     </Section>
   );
 };

@@ -20,14 +20,16 @@
 /obj/machinery/scipaper_bombprocessor/Initialize()
 	. = ..()
 	for (var/experiment_data_path in subtypesof(/datum/toxins_experiment_data))
-		// Initialized just to check if its an experiment proper.
-		var/datum/toxins_experiment_data/experiment_data_initialized = new experiment_data_path
-		if (experiment_data_initialized.experiment_proper)
+		var/datum/toxins_experiment_data/typecasted_data = experiment_data_path
+		if (initial(typecasted_data.experiment_proper))
 			all_scipaper_explosion += experiment_data_path
 		
-/obj/machinery/scipaper_bombprocessor/attackby(obj/item/transfer_valve/ttv)
+/obj/machinery/scipaper_bombprocessor/attackby(obj/item/transfer_valve/ttv, mob/living/user)
 	. = ..()
 	if(!istype(ttv))
+		return
+	if(!user.transferItemToLoc(ttv, src))
+		balloon_alert(user, span_warning("[ttv] is stuck to your hand."))
 		return
 	reset_stored_gasmixes()
 	inserted_valve = ttv
@@ -52,10 +54,11 @@
 	reaction_increment += 1
 
 /obj/machinery/scipaper_bombprocessor/proc/reset_stored_gasmixes()
-	qdel(combined_gasmix)
-	qdel(first_gasmix)
-	qdel(second_gasmix)
-	qdel(inserted_valve)
+	QDEL_NULL(combined_gasmix)
+	QDEL_NULL(first_gasmix)
+	QDEL_NULL(second_gasmix)
+	inserted_valve?.forceMove(loc)
+	inserted_valve = null
 	reaction_increment = 0
 
 /obj/machinery/scipaper_bombprocessor/ui_interact(mob/user, datum/tgui/ui)
@@ -74,8 +77,8 @@
 		if("react")
 			simulate_valve()
 		if("eject")
-			return
-
+			reset_stored_gasmixes()
+			SStgui.try_update_ui(src)
 
 /obj/machinery/scipaper_bombprocessor/ui_data(mob/user)
 	. = ..()
@@ -113,10 +116,26 @@
 	parsed_gasmixes[2]["name"] = "Tank Two"
 	parsed_gasmixes[3]["name"] = "Combined Gasmix"
 
+	data["valve"] = inserted_valve ? TRUE : FALSE
 	data["tank_gasmixes"] += list(parsed_gasmixes[1], parsed_gasmixes[2])
 	data["combined_gasmix"] += parsed_gasmixes[3]
 
 	data["reaction_increment"] = reaction_increment
 	
+	/// This list contains multiple singular_experiment_information lists.
+	var/list/parsed_experiment_information = list()
+
+	for (var/experiment_data_path in all_scipaper_explosion)		
+		/// This list contains assoc lists detailing this singular experiment.
+		var/list/singular_experiment_information = list()
+		// We had to instance this since we need to access a list
+		var/datum/toxins_experiment_data/instanced_data = new experiment_data_path
+		var/datum/experiment/toxins/experiment_path = instanced_data.relevant_experiment
+		singular_experiment_information["name"] = initial(experiment_path.name)
+		singular_experiment_information["description"] = initial(experiment_path.description)
+		singular_experiment_information["midpoints"] = instanced_data.midpoint_amount
+		parsed_experiment_information += list(singular_experiment_information)
+	
+	data["experiment_information"] = parsed_experiment_information
 	return data
 	
