@@ -944,7 +944,6 @@
 #include "code\game\machinery\deployable.dm"
 #include "code\game\machinery\dish_drive.dm"
 #include "code\game\machinery\dna_scanner.dm"
-#include "code\game\machinery\doppler_array.dm"
 #include "code\game\machinery\droneDispenser.dm"
 #include "code\game\machinery\ecto_sniffer.dm"
 #include "code\game\machinery\electrolyzer.dm"
@@ -3640,4 +3639,5 @@
 #include "code\modules\research\toxins\scipaper_bombprocessor.dm"
 #include "code\modules\research\toxins\scipaper_programs.dm"
 #include "code\modules\research\toxins\scipaper_explosions.dm"
+#include "code\\modules\research\toxins\doppler_array.dm"
 // END_INCLUDE
